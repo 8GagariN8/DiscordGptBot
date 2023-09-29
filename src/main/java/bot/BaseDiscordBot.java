@@ -31,15 +31,10 @@ public class BaseDiscordBot {
         });
 
         gateway.on(MessageCreateEvent.class).subscribe(event -> {
+
             Message message = event.getMessage();
 
-            if (message.getContent().startsWith("/gpt") && message.getContent().length() < 40 && message.getChannelId().equals(Snowflake.of(props.discordChannelId()))) {
-                log.info(message.getAuthor() + ": " + message.getContent());
-                MessageChannel channel = message.getChannel().block();
-                Objects.requireNonNull(channel).createMessage("Сформулируй вопрос более развернуто. Минимум 35 символов.\n/gpt и пробел после - не считается!").block();
-            }
-
-            if (message.getContent().startsWith("/gpt") && message.getContent().length() >= 40 && message.getChannelId().equals(Snowflake.of(props.discordChannelId()))) {
+            if (message.getContent().startsWith("/gpt") && message.getChannelId().equals(Snowflake.of(props.discordChannelId()))) {
                 log.info(message.getAuthor() + ": " + message.getContent());
                 MessageChannel channel = message.getChannel().block();
                 String responseMsg = request(message.getContent()).get(1).getContent();
