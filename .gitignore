@@ -1,0 +1,4 @@
+target/
+build/
+src/main/resources/local/
+/.idea/
