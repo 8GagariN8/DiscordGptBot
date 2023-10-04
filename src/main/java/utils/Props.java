@@ -6,8 +6,8 @@ import org.aeonbits.owner.ConfigFactory;
 @Config.LoadPolicy(Config.LoadType.MERGE)
 @Config.Sources({
         "system:properties",
-        "file:src/main/resources/local/local.properties",
-        "file:src/main/resources/application.properties"
+        "classpath:local/local.properties",
+        "classpath:application.properties"
 })
 public interface Props extends Config {
     Props props = ConfigFactory.create(Props.class);
